@@ -16,6 +16,7 @@ public class MemberServiceTest {
 	 @BeforeEach
 	 public void beforeEach() {
 		 memberRepository = new MemoryMemberRepository();
+		 /* DI : MemberService 입장에선 MemberRepository에 대해 Dependency Injection 됐다고 볼수있음 */
 		 memberService = new MemberService(memberRepository);
 	 }
 	 
@@ -23,6 +24,7 @@ public class MemberServiceTest {
 	 public void afterEach() {
 		 memberRepository.clearStore();
 	 }
+	 
 	 @Test
 	 public void 회원가입() throws Exception {
 		 
@@ -52,5 +54,6 @@ public class MemberServiceTest {
 		 memberService.join(member1);
 		 IllegalStateException e = assertThrows(IllegalStateException.class,() -> memberService.join(member2));//예외가 발생해야 한다.
 		 assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+		 System.out.println(e.getMessage());
 	 }
 }
